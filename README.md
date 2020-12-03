@@ -1,2 +1,2 @@
 # workgroup-website
-Website for a small theatre workgroup. Possibly able to be modified for reuse.
+Website for a small theatre workgroup, modifyable for reuse.

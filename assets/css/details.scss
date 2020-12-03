@@ -1,0 +1,32 @@
+@import 'colors';
+@import '~fancybox/dist/scss/jquery.fancybox';
+@import 'gallery';
+
+#details {
+  background-color: $bg-secondary;
+  p {
+    font-size: larger;
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
+  #main-image {
+    border-bottom-right-radius: 80%;
+    max-width: 100%;
+    height: auto;
+    margin-right: 1rem;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+  h2 {
+    font-size: 1em;
+  }
+}
+
+#contributors {
+  label {
+    font-weight: bold;
+  }
+}

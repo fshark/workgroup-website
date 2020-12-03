@@ -1,0 +1,84 @@
+@import url('https://use.fontawesome.com/releases/v5.6.0/css/all.css');
+
+@import 'custom/variables';
+@import 'custom/mixins';
+
+// Core CSS
+@import "custom/background";
+@import "custom/buttons";
+@import "custom/inputs";
+@import "custom/typography";
+@import "custom/sliders";
+@import "custom/checkbox-radio-toggle";
+@import "custom/navbars";
+@import "custom/tables";
+@import "custom/navs";
+@import "custom/pagination";
+@import "custom/badges";
+@import "custom/progress-bars";
+@import "custom/alerts";
+@import "custom/tooltips";
+@import "custom/popovers";
+@import "custom/modals";
+@import "custom/cards";
+@import "custom/dropdown";
+
+//misc
+@import "custom/misc";
+
+//components
+@import "custom/footers";
+
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  //background-color: #cc0000;
+  //background-image: linear-gradient(#cc0000, white);
+  margin-bottom: 155px;
+}
+
+main {
+  padding-top: 30px;
+}
+
+aside {
+  li {
+    margin-bottom: 0.3em;
+  }
+
+  label {
+    margin-bottom: 0;
+  }
+}
+
+
+@media (min-width: 575px) {
+  .card-deck {
+    h5 {
+      font-size: 1rem;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+}
+
+@media (min-width: 992px) {
+  aside {
+    > div {
+      background-color: $bg-info;
+    }
+  }
+  .card-deck {
+    h5 {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+}

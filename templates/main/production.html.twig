@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+{% set current = 'production' %}
+{% block title %}Theaterstück: {{ production.play.title }} von {{ production.play.author }}{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('details') }}
+{% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('details') }}
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div id="details" class="col rounded mb-3 pl-0 pr-0">
+
+        <div class="w100 p-0 d-md-none">
+            <img id="main-image" alt="{{ production.play.title }}" src="{{ asset('img/'~production.mainImage.filename) }}" class="rounded w-100 p-0">
+        </div>
+        <div class="row p-4">
+            <div class="col pl-4 pr-4">
+                <img id="main-image" alt="{{ production.play.title }}" src="{{ asset('img/'~production.mainImage.filename) }}"
+                     class="rounded img-fluid float-left w-50 mr-md-4 mb-md-2 d-none d-md-flex">
+                <h1>{{ production.play.title }} ({{ production.year }})</h1>
+                <h2 >von {{ production.play.author }}</h2>
+                <p>{{ production.play.synopsis }}</p>
+            </div>
+        </div>
+
+        {% if production.isBookable %}
+            <div class="row">
+                <div class="col-3 float-right">
+                    <a href="{{ path('app_ticketrequest_create') }}">>> Karten anfragen</a>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if production.images.count > 0 %}
+        <div class="row m-0">
+            {% for image in production.images|shuffle %}
+            <div class="col-md-4 col-6 thumb">
+                <a href="{{ asset('img/'~image.filename) }}" class="fancybox" rel="ligthbox">
+                    <img src="{{ asset('img/'~image.filename) }}" class="zoom img-fluid " alt="">
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+    <aside class="col-12 col-lg-3 pr-lg-0">
+        {% if actors %}
+        <div class="col p-3 ml-lg-3 mb-3 rounded text-center text-lg-left">
+            <h5>Schauspieler:</h5>
+            <ol class="list-unstyled">
+                {% for actor in actors %}
+                <li>
+                    {% if actor.member.active %}
+                    <a href="{{ path('app_member_detail', {id: actor.member.id}) }}">
+                        {{ actor.member.fullname }}
+                    </a>
+                    {% else %}
+                    {{ actor.member.fullname }}
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ol>
+        </div>
+        {% endif %}
+        {% if contributors %}
+        <div id="contributors" class="col p-3 ml-lg-3 mb-3 rounded text-center text-lg-left">
+            <h5>Mitwirkende:</h5>
+            <ol class="list-unstyled">
+                {% for contributor in contributors %}
+                <li>
+                    <label>{{ contributor.role.title }}:</label><br/>
+                    {% if contributor.member.active %}
+                    <a href="{{ path('app_member_detail', {id: contributor.member.id}) }}">
+                        {{ contributor.member.fullname }}
+                    </a>
+                    {% else %}
+                        {{ contributor.member.fullname }}
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ol>
+        </div>
+        {% endif %}
+    </aside>
+</div>
+
+<div class="row mt-4 ml-2 mr-2 mb-4">
+    <div class="row">
+        <h5>Weitere Stücke: </h5>
+    </div>
+
+    <div class="row">
+        {% for item in more %}
+            <div class="card col-3 p-0">
+                <a class="no-dec" href="{{ path('app_production_detail', {id: item.id}) }}" title="{{ item.title }}">
+                    <img alt="{{ item.title }}" src="{{ asset('img/'~item.filename) }}" class="card-img-top">
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="row mt-4 w-100">
+        <div class="col text-center">
+            <a class="btn btn-primary btn-pill btn-sm" href="{{ path('app_production_list') }}" title="Zur Übersicht"><i class='fas fa-grip-horizontal'></i></a>
+            <a class="btn btn-primary btn-pill btn-sm" href="{{ app.request.headers.get('referer') }}" title="Letztes Stück"><i class='fas fa-angle-left'></i></a>
+            <a class="btn btn-primary btn-pill btn-sm" href="#" title="Nach oben"><i class='fas fa-angle-up'></i></a>
+            <a class="btn btn-primary btn-pill btn-sm" href="{{ path('app_production_detail', {id: more.0.id}) }}" title="Nächstes Stück"><i class='fas fa-angle-right'></i></a>
+        </div>
+    </div>
+</div>
+{% endblock %}

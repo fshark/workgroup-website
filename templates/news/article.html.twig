@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% set current = 'news' %}
+{% block title %}Neuigkeiten: {{ article.title }}{% endblock %}
+
+{% block body %}
+
+<span><small>{{ article.date | date('d.m.Y')}}</small></span><br/>
+<h1>{{ article.title }}</h1>
+<h4>{{ article.subtitle }}</h4>
+
+{% for paragraph in article.paragraphs %}
+<div class="row mt-4">
+{#    {% if paragraph.image %}#}
+{#    <div class="col-4 p-0 float-{{ paragraph.imagePosition ?? 'left' }}">#}
+{#        <img class="img-fluid rounded" alt="{{ paragraph.image.title }}" src="{{ asset('img/'~paragraph.image.filename) }}">#}
+{#    </div>#}
+{#    {% endif %}#}
+    <div class="col pb-4 pt-0">
+        {% if paragraph.image %}
+        <img class="img-fluid rounded w-50 p{{ paragraph.imagePosition == 'right' ? 'l' : 'r' }}-4 float-{{ paragraph.imagePosition ?? 'left' }}" alt="{{ paragraph.image.title }}" src="{{ asset('img/'~paragraph.image.filename) }}">
+        {% endif %}
+        <p class="lead">{{ paragraph.content }}</p>
+    </div>
+</div>
+{% endfor %}
+
+<div class="row m-0 mb-3">
+    <div class="col text-right">
+        <a class="btn btn-primary btn-pill btn-sm" href="{{ path('app_news_list') }}" title="Zur Übersicht"><i class='fas fa-angle-left'></i>&nbsp;&nbsp;Zur Übersicht</a>
+    </div>
+</div>
+
+{% endblock %}

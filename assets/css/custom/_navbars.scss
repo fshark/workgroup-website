@@ -1,0 +1,65 @@
+.navbar, .navbar-light {
+	padding: .5rem 1rem;
+	box-shadow: 0 .25em .5em $grey-200;
+	
+	.navbar-brand {
+		font-weight: 800;
+	}
+	
+	.nav-link {
+		font-weight: 500;
+		color: $primary;
+		margin-right: .5em;
+		padding-left: .5em;
+
+		&.active,
+		&:hover,
+		&:active,
+		&:focus {
+			color: $light !important;
+			background-color: $primary;
+			transition: .3s ease-out;
+		}
+	}
+}
+
+
+.navbar-dark {
+	.navbar-nav {
+		.nav-link {
+			color: rgba($white, 0.9);
+			&:hover,
+			&:active,
+			&:focus {
+				color: rgba($white, 1);
+			}
+		}
+	}
+}
+
+.navbar-light {
+	.navbar-nav {
+		.nav-link {
+			color: $primary;
+			margin-right: .5em;
+			&:hover,
+			&:active,
+			&:focus {
+				color: $light;
+				background-color: $primary;
+				transition: .3s ease-out;
+			}
+			//&:visited {
+			//	color: darken($primary, 10%);
+			//}
+			//&.active {
+			//	color: $light;
+			//	background-color: $primary;
+			//}
+		}
+	}
+}
+
+.navbar-transparent {
+	background-color: transparent;
+}

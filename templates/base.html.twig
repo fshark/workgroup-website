@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Theaterwerkstatt Holm - Offizielle Seite der Amateur-Theatergruppe">
+        <title>Theaterwerkstatt Holm - {% block title %}{% endblock %}</title>
+        {{ encore_entry_link_tags('app') }}
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body class="index">
+        <nav class="navbar navbar-light navbar-expand-md bg-light sticky-top">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <img src="{{ asset('img/page/title_complete_small.png') }}" alt="Theaterwerkstatt Holm" height="35em">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div class="navbar-nav mr-auto">
+                        <a class="nav-item rounded nav-link{% if current == 'member' %} active{% endif %}" href="{{ path('app_member_list') }}">
+                            <i class="fas fa-users"></i> Mitglieder
+                        </a>
+                        <a class="nav-item rounded nav-link{% if current == 'production' %} active{% endif %}" href="{{ path('app_production_list') }}">
+                            <i class="fas fa-theater-masks"></i> Theaterstücke
+                        </a>
+                        <a class="nav-item rounded nav-link{% if current == 'news' %} active{% endif %}" href="{{ path('app_news_list') }}">
+                            <i class="fas fa-newspaper"></i> Neuigkeiten
+                        </a>
+{#                        <a class="nav-item rounded nav-link{% if current == 'tickets' %} active{% endif %}" href="{{ path('app_ticketrequest_create') }}">#}
+{#                            <i class="fas fa-ticket-alt"></i> Kartenanfrage#}
+{#                        </a>#}
+                    </div>
+{#                    <form class="form-inline my-2 my-lg-0">#}
+{#                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">#}
+{#                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
+{#                    </form>#}
+                </div>
+            </div>
+        </nav>
+
+        <main role="main" class="container">
+        {% block body %}{% endblock %}
+        </main>
+
+        <footer class="footer-1 bg-light">
+            <div class="container">
+                <div class="d-flex flex-column justify-content-between align-items-center">
+                    <div class="links">
+                        <ul class="footer-menu list-unstyled d-flex flex-row text-center">
+                            <li><a href="{{ path('app_page_contact') }}" class="{% if current == 'contact' %}active{% endif %}">Kontakt/Anfahrt</a></li>
+                            <li><a href="{{ path('app_page_imprint') }}" class="{% if current == 'imprint' %}active{% endif %}">Impressum</a></li>
+                            <li><a href="{{ path('app_page_security') }}" class="{% if current == 'security' %}active{% endif %}">Datenschutz</a></li>
+                        </ul>
+                    </div>
+                    <div class="social m-2">
+                        <a class="facebook btn btn-outline-primary btn-icon" href="https://www.facebook.com/theaterwerkstattholm/" target="_blank">
+                            <i class="fab fa-facebook"></i>
+                            <span class="sr-only">Zu unserem Facebook Profil</span>
+                        </a>
+                        <a class="instagram btn btn-outline-primary btn-icon" href="https://www.instagram.com/theaterwerkstatt.holm/" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                            <span class="sr-only">Zu unserem Instagram Profil</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="copyright text-center">
+                    <p class="small">&copy; 2020 by Florian Isachsen, made with <span class="text-primary"><i class="fas fa-heart"></i></span></p>
+                </div>
+            </div>
+        </footer>
+
+        <div class="alert text-center cookiealert bg-warning" role="alert">
+            <b class="text-warning">Verwendung von Cookies</b>
+            <p>
+                Um unsere Webseite für Euch optimal zu gestalten und fortlaufend verbessern zu können, verwenden wir Cookies.
+                Durch die weitere Nutzung der Webseite stimmt Ihr der Verwendung von Cookies zu.
+                Weitere Informationen zu Cookies erhaltet Ihr in unserer <a href="{{ path('app_page_security') }}">Datenschutzerklärung</a>.
+            </p>
+            <button type="button" class="btn btn-outline-warning btn-sm acceptcookies">Ich stimme zu.</button>
+        </div>
+
+        {{ encore_entry_script_tags('app') }}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

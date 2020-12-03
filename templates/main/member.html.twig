@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+{% set current = 'member' %}
+{% block title %}Mitglied: {{ member.fullname }}{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('details') }}
+{% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('details') }}
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div id="details" class="col p-0 rounded">
+        <div class="row p-0 mb-3">
+            <div class="col-lg-5">
+                <img id="main-image" alt="{{ member.firstname }}" src="{{ asset('img/'~member.mainImage.filename) }}" class="float-left">
+            </div>
+
+            <div class="col-lg-7 mt-3 pr-5 pl-5 pl-lg-0">
+                <h1>{{ member.firstname }} {{ member.lastname }}</h1>
+                <p>{{ member.description }}</p>
+            </div>
+        </div>
+
+        {% if member.images.count > 0 %}
+        <div class="row m-0">
+            {% for image in member.images|shuffle %}
+                <div class="col-md-4 col-6 thumb">
+                    <a href="{{ asset('img/'~image.filename) }}" class="fancybox" rel="ligthbox"
+                       data-fancybox="{{ image.title }}"
+                       data-caption="{{ image.title }}">
+                        <img src="{{ asset('img/'~image.filename) }}" class="zoom img-fluid " alt="">
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+    <aside class="col-12 col-lg-3 pr-lg-0">
+        {% if actings|length > 0 %}
+        <div class="col p-3 ml-lg-3 mb-3 rounded text-center text-lg-left">
+            <h6>Mitgespielt in:</h6>
+            <ol class="list-unstyled">
+                {% for contribution in actings %}
+                <li>
+                    <a href="{{ path('app_production_detail', {id: contribution.production.id}) }}">
+                        {{ contribution.production.play.title }} ({{ contribution.production.year }})
+                    </a>
+                </li>
+                {% endfor %}
+            </ol>
+        </div>
+        {% endif %}
+        {% if contributions|length > 0 %}
+        <div class="col p-3 ml-lg-3 mb-3 text-center text-lg-left rounded">
+            <h6>Mitgewirkt in:</h6>
+            <ol class="list-unstyled">
+                {% for contribution in contributions %}
+                <li data-toggle="tooltip" data-placement="bottom" title="{{ contribution.roles | join(', ') }}" >
+                    <a href="{{ path('app_production_detail', {id: contribution.link_id}) }}">
+                        {{ contribution.title }} ({{ contribution.year}})
+                    </a>
+                </li>
+                {% endfor %}
+            </ol>
+        </div>
+        {% endif %}
+    </aside>
+</div>
+{% endblock %}

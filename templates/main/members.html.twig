@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% set current = 'member' %}
+{% block title %}Mitglieder{% endblock %}
+
+{% block body %}
+
+<h1>Das sind unsere Mitglieder!</h1>
+<p></p>
+<div class="card-deck">
+    {% for member in members %}
+
+    <div class="card rounded mb-4">
+        {% if member.mainImage %}
+        <a class="no-dec" href="{{ path('app_member_detail', {id: member.id}) }}">
+            <img alt="{{ member.firstname }}" src="{{ asset('img/'~member.mainImage.filename) }}" class="card-img-top">
+        </a>
+        {% endif %}
+        <div class="card-body">
+            <a href="{{ path('app_member_detail', {id: member.id}) }}">
+                <h5 class="card-title text-primary">{{ member.fullname }}</h5>
+            </a>
+            {% if member.since %}
+            <p class="card-text">
+                <small class="text-muted">Mitglied seit {{ member.since }}</small>
+            </p>
+            {% endif %}
+        </div>
+    </div>
+
+
+    {% if loop.index is divisible by(3) %}
+    </div>
+    <div class="card-deck">
+    {% endif %}
+
+    {% endfor %}
+</div>
+
+{% endblock %}

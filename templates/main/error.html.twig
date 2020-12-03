@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% set current = 'error' %}
+{% block title %}Huch!{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('error') }}
+{% endblock %}
+
+{% block body %}
+<div class="row bg-light p-5">
+    <div class="col p-5" id="errorpage">
+        <div class="errorpage-wrapper">
+            <div class="errorpage-title">
+                <h1>Huch!</h1>
+            </div>
+            <h2>{{ error_title | default('Es ist ein Fehler passiert. Das soll natürlich nicht sein.') }}</h2>
+            <p>{{ error_message | default('Bitte versuche es noch einmal oder kontaktiere uns.') }}</p>
+            <a class="btn btn-primary btn-lg" href="{{ target_path | default(path('app_page_contact')) }}" role="button">
+                {{ target_page | default('Zur Kontaktseite') }}
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

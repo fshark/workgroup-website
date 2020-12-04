@@ -34,22 +34,12 @@ class TicketRequest
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $street;
+    private $emailaddress;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $housenumber;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $zipcode;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $city;
+    private $phonenumber;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Event", inversedBy="ticketRequests")
@@ -98,54 +88,6 @@ class TicketRequest
         return $this;
     }
 
-    public function getStreet(): ?string
-    {
-        return $this->street;
-    }
-
-    public function setStreet(string $street): self
-    {
-        $this->street = $street;
-
-        return $this;
-    }
-
-    public function getHousenumber(): ?string
-    {
-        return $this->housenumber;
-    }
-
-    public function setHousenumber(string $housenumber): self
-    {
-        $this->housenumber = $housenumber;
-
-        return $this;
-    }
-
-    public function getZipcode(): ?int
-    {
-        return $this->zipcode;
-    }
-
-    public function setZipcode(int $zipcode): self
-    {
-        $this->zipcode = $zipcode;
-
-        return $this;
-    }
-
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(string $city): self
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
     public function getEvent(): ?Event
     {
         return $this->event;
@@ -158,11 +100,58 @@ class TicketRequest
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getEmailaddress(): ?string
+    {
+        return $this->emailaddress;
+    }
+
+    /**
+     * @param string $emailaddress
+     * @return self
+     */
+    public function setEmailaddress($emailaddress): self
+    {
+        $this->emailaddress = $emailaddress;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhonenumber(): ?string
+    {
+        return $this->phonenumber;
+    }
+
+    /**
+     * @param string $phonenumber
+     * @return self
+     */
+    public function setPhonenumber($phonenumber): self
+    {
+        $this->phonenumber = $phonenumber;
+
+        return $this;
+    }
+
     public static function createDefault(): TicketRequest
     {
         $result = new self();
         $result->setAmount(2);
 
         return $result;
+    }
+
+    public function __toString(): string
+    {
+        return 'Kartenanfrage: '.$this->getEvent().PHP_EOL .
+            'Anzahl: '.$this->getAmount().PHP_EOL .
+            'Name: '.$this->getFirstname(). ' '.$this->getLastname().PHP_EOL .
+            'Email-Adresse: '.$this->getEmailaddress().PHP_EOL .
+            'Telefonnummer: '.$this->getPhonenumber();
     }
 }

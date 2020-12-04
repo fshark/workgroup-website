@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% set current = 'tickets' %}
+{% block stylesheets %}
+
+{% endblock %}
+
+{% block body %}
+    <h1>Deine Anfrage ist bei uns angekommen.</h1>
+
+    {{ ticket_request.event }}
+{% endblock %}

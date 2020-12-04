@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% set current = 'tickets' %}
+{% block title %}Kartenanfrage{% endblock %}
+
+{% block body %}
+<div class="row align-content-center">
+    <div class="col-8">
+        <h1>Anfrage für Eintrittskarten</h1>
+        <p>Hier kannst Du Karten für unsere Vorstellungen anfragen.<br/>
+            Bitte beachte, dass es sich hierbei nur um eine Anfrage handelt und wir nicht garantieren können, dass die gewünschte Kartenanzahl am gewünschten Termin noch verfügbar ist.
+            Wir setzen uns so schnell wie möglich mit Dir in Verbindung, um Dir mitzuteilen, ob wir Deinem Wunsch nachkommen können oder etwas anderes anbieten können.
+            Hierfür brauchen wir Deine Email-Adresse und wenn Du magst auch Deine Telefonnummer. Selbstverständlich werden Deine Daten vertraulich behandelt. Mehr hierzu findest Du in unserer <a href="{{ path('app_page_security') }}">Datenschutzerklärung</a>.
+        </p>
+        {{ form(form) }}
+    </div>
+    <div class="col-4"></div>
+</div>
+{% endblock %}
